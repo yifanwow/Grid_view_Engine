@@ -6,27 +6,29 @@
         <!-- Define Rows for better organization -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- For the buttons and input box -->
+            <!-- For the Start Process button -->
+            <RowDefinition Height="Auto"/>
+            <!-- For the instructions -->
             <RowDefinition Height="*"/>
             <!-- For the list and output box -->
         </Grid.RowDefinitions>
 
         <!-- Define Columns -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="21*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Start Process Button -->
-        <Button Content="Start Process" Grid.Row="0" Grid.Column="0" Margin="10" Height="30" Click="OnStartProcess"/>
+        <Button Content="Start Process" Grid.Row="0" Margin="10,10,10,10" Click="OnStartProcess"/>
 
-        <!-- InputSteamPathBox -->
-        <TextBox x:Name="InputSteamPathBox" Grid.Row="0" Grid.Column="1" Margin="10,10,10,0"/>
+        <!-- Instructions TextBlock -->
+        <TextBlock Grid.Row="1" Margin="10,10,10,10" TextWrapping="Wrap" ><Run Text="Welcome to use the Grid View Engine! "/><LineBreak/><Run Text="How to use: "/><LineBreak/><Run Text="1. Click the &quot;Start Process&quot; Button. "/><LineBreak/><Run Text="2. All the game you already install will show in the box. "/><LineBreak/><Run Text="3. Click the Game you want to change grid."/><LineBreak/><Run Text="4. Confirm"/></TextBlock>
 
         <!-- OutputBox -->
-        <TextBox x:Name="OutputBox" Grid.Row="1" Grid.Column="0" Margin="10" VerticalScrollBarVisibility="Auto" TextChanged="OutputBox_TextChanged"/>
+        <TextBox x:Name="OutputBox" Grid.Row="2" Grid.Column="0" Margin="10,10,10,10" VerticalScrollBarVisibility="Auto" TextChanged="OutputBox_TextChanged"/>
 
         <!-- GamesList -->
-        <ListBox x:Name="GamesList" Grid.Row="1" Grid.Column="1" Margin="10" SelectionChanged="GamesList_SelectionChanged"/>
+        <ListBox x:Name="GamesList" Grid.Column="1" Margin="10,10,10,10" SelectionChanged="GamesList_SelectionChanged" Grid.RowSpan="3"/>
     </Grid>
 </Window>

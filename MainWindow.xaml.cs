@@ -28,7 +28,7 @@ namespace Grid_view_Engine
             if (string.IsNullOrEmpty(steamPath))  // <-- Use the class-level variable
             {
                 OutputBox.Text += "Could not automatically detect Steam installation path. Please enter it manually:\n";
-                steamPath = InputSteamPathBox.Text; // <-- Use the class-level variable
+                //steamPath = InputSteamPathBox.Text; // <-- Use the class-level variable
             }
 
             OutputBox.Text += "Steam installation path: " + steamPath + "\n";
@@ -133,6 +133,11 @@ namespace Grid_view_Engine
         } // ... Your GetSteamInfo and ReplaceImage methods here ...
 
         private void OutputBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
+
+        private void InputSteamPathBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
         }
