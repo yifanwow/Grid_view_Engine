@@ -18,3 +18,5 @@ D:\Git-hub\Yifanwow\Software\Grid_view_Engine\obj\Debug\net7.0-windows\refint\Gr
 D:\Git-hub\Yifanwow\Software\Grid_view_Engine\obj\Debug\net7.0-windows\Grid_view_Engine.pdb
 D:\Git-hub\Yifanwow\Software\Grid_view_Engine\obj\Debug\net7.0-windows\Grid_view_Engine.genruntimeconfig.cache
 D:\Git-hub\Yifanwow\Software\Grid_view_Engine\obj\Debug\net7.0-windows\ref\Grid_view_Engine.dll
+D:\Git-hub\Yifanwow\Software\Grid_view_Engine\obj\Debug\net7.0-windows\ConfirmationDialog.baml
+D:\Git-hub\Yifanwow\Software\Grid_view_Engine\obj\Debug\net7.0-windows\ConfirmationDialog.g.cs

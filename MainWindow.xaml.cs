@@ -11,6 +11,7 @@ namespace Grid_view_Engine
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string steamPath;
         public MainWindow()
         {
             InitializeComponent();
@@ -19,21 +20,15 @@ namespace Grid_view_Engine
         private void OnStartProcess(object sender, RoutedEventArgs e)
         {
             OutputBox.Text += "Starting the process...\n";
-
-            string directory = @"F:\Software_develop\image";
-            string fileName = "test.png";
-            string imagePath = Path.Combine(directory, fileName);
-
             OutputBox.Text += "Getting The Game List\n";
-            string steamPath;
+            
             SortedDictionary<string, string> apps;
-            GetSteamInfo(out steamPath, out apps);
+            GetSteamInfo(out apps);
 
-            if (steamPath == null)
+            if (string.IsNullOrEmpty(steamPath))  // <-- Use the class-level variable
             {
                 OutputBox.Text += "Could not automatically detect Steam installation path. Please enter it manually:\n";
-                // You can use an input dialog or a TextBox for this.
-                steamPath = InputSteamPathBox.Text; // Assuming you have a TextBox named InputSteamPathBox for manual input
+                steamPath = InputSteamPathBox.Text; // <-- Use the class-level variable
             }
 
             OutputBox.Text += "Steam installation path: " + steamPath + "\n";
@@ -52,22 +47,38 @@ namespace Grid_view_Engine
             if (GamesList.SelectedItem != null)
             {
                 string appName = GamesList.SelectedItem.ToString();
-                SortedDictionary<string, string> apps;
-                GetSteamInfo(out _, out apps);
-                string appId = apps[appName];
 
-                string steamID = "896533048"; // Replace with your SteamID
+                string directory = @"F:\Software_develop\image";
+                string fileName = "test.png";
+                string imagePath = Path.Combine(directory, fileName);
 
-                OutputBox.Text += "We are trying to get the Steam Path\n";
-                ReplaceImage(steamID, appId, "YOUR_IMAGE_PATH_HERE", "YOUR_STEAM_PATH_HERE");
+                // Show the confirmation dialog
+                ConfirmationDialog dialog = new ConfirmationDialog(appName);
+                dialog.Owner = this;
+                dialog.ShowDialog();
+
+                if (dialog.UserConfirmed)
+                {
+                    // If the user confirmed, continue with the process
+                    SortedDictionary<string, string> apps;
+                    GetSteamInfo(out apps);
+                    string appId = apps[appName];
+
+                    string steamID = "896533048"; // Replace with your SteamID
+                    OutputBox.Text += "Your steam ID is:" + steamID + "\n";
+                    OutputBox.Text += "We are trying to get the Steam Path\n";
+                    ReplaceImage(steamID, appId, imagePath, steamPath);
+
+                    OutputBox.Text += $"Successfully replaced grid view image for {appName}.\n";
+                }
             }
         }
 
 
-        static void GetSteamInfo(out string steamPath, out SortedDictionary<string, string> apps)
+        private void GetSteamInfo(out SortedDictionary<string, string> apps)  // <-- Removed the steamPath parameter
         {
-            steamPath = null;
             apps = new SortedDictionary<string, string>();
+
 
             string registry_key = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
             using (RegistryKey key = Registry.LocalMachine.OpenSubKey(registry_key))
@@ -92,9 +103,8 @@ namespace Grid_view_Engine
 
                             apps[appName] = appId;
 
-                            if (steamPath == null)
+                            if (steamPath == null)  // <-- Use the class-level variable
                             {
-                                // Extract the Steam path from the install location
                                 steamPath = installLocation.Substring(
                                     0,
                                     installLocation.IndexOf("\\steamapps")

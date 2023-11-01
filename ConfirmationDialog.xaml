@@ -1,0 +1,10 @@
+﻿<Window x:Class="Grid_view_Engine.ConfirmationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Confirmation" Height="150" Width="300" ResizeMode="NoResize">
+    <Grid>
+        <Label x:Name="ConfirmLabel" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10"/>
+        <Button Content="Yes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="40,0,0,10" Width="80" Height="30" Click="YesButton_Click"/>
+        <Button Content="No" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,40,10" Width="80" Height="30" Click="NoButton_Click"/>
+    </Grid>
+</Window>
